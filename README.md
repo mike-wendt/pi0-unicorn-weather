@@ -9,10 +9,10 @@ Using a Pi Zero Wireless and PimoRoni Unicorn hat this program displays the next
 
 * Install Raspbian Jessie Lite for Pi Zero Wireless and setup with Internet/SSH
 * Install libs for PimoRoni Unicorn pHAT
- * https://github.com/pimoroni/unicorn-hat
- * **NOTE:** No need to install Python 3 or examples
+  * https://github.com/pimoroni/unicorn-hat
+  * **NOTE:** No need to install Python 3 or examples
 * Install libs for DarkSky API
- * `pip install darkskylib==0.3.5`
+  * `pip install darkskylib==0.3.5`
 
 ## Install & Config
 
