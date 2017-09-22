@@ -21,6 +21,10 @@ Using a Pi Zero Wireless and PimoRoni Unicorn hat this program displays the next
 desired settings, API key, and location
 3. Run `weather.py`, use `cron` to start on boot
 
+## Reading the Weather
+
+Guide coming soon
+
 ## Shoutouts
 
 * [Dark Sky API](https://darksky.net/dev) - for their awesome weather APIs
