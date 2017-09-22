@@ -3,21 +3,27 @@
 import unicornhat as uh
 import time
 
-# Colors used by the app [r,g,b]
-CLEAR_COLOR=[255,191,0]
-RAIN_COLOR=[0,72,186]
-SNOW_COLOR=[0,255,255]
-WIND_COLOR=[227,38,54]
-FOG_COLOR=[255,0,255]
-CLOUDY_COLOR=[240,248,255]
-PARTLY_CLOUDY_COLOR=[90,94,97]
+### START CONFIG ###
+
+# Colors used by the app (r,g,b)
+NO_COLOR=(55,55,55)
+CLEAR_COLOR=(255,191,0)
+RAIN_COLOR=(0,72,186)
+SNOW_COLOR=(0,255,255)
+WIND_COLOR=(255,0,255)
+FOG_COLOR=(0,127,0)
+CLOUDY_COLOR=(240,248,255)
+PARTLY_CLOUDY_COLOR=(90,94,97)
 
 # Names used by darksky.net https://darksky.net/dev/docs#data-point-object
 ICON_NAMES=['clear-day', 'clear-night', 'rain', 'snow', 'sleet', 'wind', 'fog', 'cloudy', 'partly-cloudy-day', 'partly-cloudy-night']
-ICON_COLORS=[CLEAR_COLOR,CLEAR_COLOR,RAIN_COLOR,SNOW_COLOR,SNOW_COLOR,WIND_COLOR,FOG_COLOR,CLOUDY_COLOR,PARTLY_CLOUDY_COLOR,PARTLY_CLOUDY_COLOR]
-ICON_DEFAULT_COLOR=[63,0,0]
+ICON_COLORS=[CLEAR_COLOR,NO_COLOR,RAIN_COLOR,SNOW_COLOR,SNOW_COLOR,WIND_COLOR,FOG_COLOR,CLOUDY_COLOR,PARTLY_CLOUDY_COLOR,PARTLY_CLOUDY_COLOR]
+ICON_UNKNOWN_COLOR=(127,0,0)
 
-# setup unicorn phat
+### END CONFIG ###
+
+
+# Setup unicorn phat
 uh.set_layout(uh.PHAT)
 uh.rotation(0)
 uh.brightness(0.6)
