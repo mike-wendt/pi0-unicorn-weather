@@ -7,51 +7,56 @@ from darksky import forecast
 ### START CONFIG ###
 
 # Colors used by the app (r,g,b)
-NO_COLOR=(55,55,55)
-CLEAR_COLOR=(255,191,0)
-RAIN_COLOR=(0,72,186)
-SNOW_COLOR=(0,255,255)
-WIND_COLOR=(255,0,255)
-FOG_COLOR=(0,127,0)
-CLOUDY_COLOR=(240,248,255)
-PARTLY_CLOUDY_COLOR=(90,94,97)
+NO_COLOR = (55,55,55)
+CLEAR_COLOR = (255,191,0)
+RAIN_COLOR = (0,72,186)
+SNOW_COLOR = (0,255,255)
+WIND_COLOR = (255,0,255)
+FOG_COLOR = (0,127,0)
+CLOUDY_COLOR = (240,248,255)
+PARTLY_CLOUDY_COLOR = (90,94,97)
 
 # Names used by darksky.net https://darksky.net/dev/docs#data-point-object
-ICON_NAMES=['clear-day', 'clear-night', 'rain', 'snow', 'sleet', 'wind', 'fog', 'cloudy', 'partly-cloudy-day', 'partly-cloudy-night']
-ICON_COLORS=[CLEAR_COLOR,NO_COLOR,RAIN_COLOR,SNOW_COLOR,SNOW_COLOR,WIND_COLOR,FOG_COLOR,CLOUDY_COLOR,PARTLY_CLOUDY_COLOR,PARTLY_CLOUDY_COLOR]
-ICON_UNKNOWN_COLOR=(127,0,0)
+ICON_NAMES = ['clear-day', 'clear-night', 'rain', 'snow', 'sleet', 'wind',
+                'fog', 'cloudy', 'partly-cloudy-day', 'partly-cloudy-night']
+ICON_COLORS = [CLEAR_COLOR, NO_COLOR, RAIN_COLOR, SNOW_COLOR, SNOW_COLOR,
+                WIND_COLOR, FOG_COLOR, CLOUDY_COLOR, PARTLY_CLOUDY_COLOR,
+                PARTLY_CLOUDY_COLOR]
+ICON_UNKNOWN_COLOR = (127,0,0)
 
 # Column numbers
-COL_ICON=3
-COL_TEMP=2
-COL_PRECIP=1
-COL_WIND=0
+COL_ICON = 3
+COL_TEMP = 2
+COL_PRECIP = 1
+COL_WIND = 0
 
-# Darksky API setup
-DARKSKY_KEY='API_KEY'
-DARKSKY_LOC=[38.895,-77.0366]
+# Dark Sky API key
+DARKSKY_KEY = 'API_KEY'
+
+# Dark Sky coordinates for weather forecast; from URL of forecast
+DARKSKY_LOC = [38.895,-77.0366]
 
 # Update frequency in seconds
-UPDATE_SPEED=300
+UPDATE_SPEED = 300
 
 # Settings for pulses
 PULSE_MULTIPLIER = 5
 PULSE_STEPS = 20 * PULSE_MULTIPLIER
 
 # Time in sec between refreshes, effects pulse cycle time
-TIME_STEP=0.05
+TIME_STEP = 0.05
 
 ### END CONFIG ###
 
 ### START GLOBALS ###
-PRECIP_VALS=[0,0,0,0,0,0,0,0]
-WIND_VALS=[0,0,0,0,0,0,0,0]
+PRECIP_VALS = [0,0,0,0,0,0,0,0]
+WIND_VALS = [0,0,0,0,0,0,0,0]
 
 # Counter for animations
-TICK=0
+TICK = 0
 
 # Last update
-UPDATE_LAST=0
+UPDATE_LAST = 0
 
 ### END GLOBALS ###
 
@@ -61,7 +66,7 @@ uh.rotation(0)
 uh.brightness(0.6)
 
 # Helpers to set pixel colors
-def set_color(x,y,color):
+def set_color(x, y, color):
     r = int(max(0, min(255, color[0])))
     g = int(max(0, min(255, color[1])))
     b = int(max(0, min(255, color[2])))
@@ -77,9 +82,9 @@ def colorFade(x, y, colorFrom, colorTo, steps=10, step=0):
     set_color(x,y,[r,g,b])
 
 # Helpers for updating weather data
-def set_icon(x,icon):
+def set_icon(x, icon):
     color = ICON_UNKNOWN_COLOR
-    idx=0
+    idx = 0
     for name in ICON_NAMES:
         if name == icon:
             color = ICON_COLORS[idx]
@@ -87,18 +92,18 @@ def set_icon(x,icon):
         idx+=1
     set_color(x,COL_ICON,color)
 
-def set_temp(x,temp):
+def set_temp(x, temp):
     return
 
-def set_precip(x,precip):
-    PRECIP_VALS[x]=int(precip*100)
+def set_precip(x, precip):
+    PRECIP_VALS[x] = int(precip * 100)
 
-def set_wind(x,wind):
-    WIND_VALS[x]=int(wind)
+def set_wind(x, wind):
+    WIND_VALS[x] = int(wind)
 
 def update_weather():
     global UPDATE_LAST
-    if UPDATE_LAST==0 or UPDATE_SPEED+UPDATE_LAST < time.time():
+    if UPDATE_LAST == 0 or UPDATE_SPEED + UPDATE_LAST < time.time():
         weather = forecast(DARKSKY_KEY, DARKSKY_LOC[0], DARKSKY_LOC[1])
 
         for i in range(8):
@@ -116,17 +121,17 @@ def update_weather():
 # Helpers for updating pulses
 def get_pulse_duration_wind(val):
     if val >= 35:
-        return 20*PULSE_MULTIPLIER
+        return 20 * PULSE_MULTIPLIER
     elif val < 35 and val >= 25:
-        return 16*PULSE_MULTIPLIER
+        return 16 * PULSE_MULTIPLIER
     elif val < 25 and val >= 19:
-        return 12*PULSE_MULTIPLIER
+        return 12 * PULSE_MULTIPLIER
     elif val < 19 and val >= 13:
-        return 8*PULSE_MULTIPLIER
+        return 8 * PULSE_MULTIPLIER
     elif val < 13 and val >= 8:
-        return 4*PULSE_MULTIPLIER
+        return 4 * PULSE_MULTIPLIER
     elif val < 8 and val >= 5:
-        return 2*PULSE_MULTIPLIER
+        return 2 * PULSE_MULTIPLIER
     elif val < 5 and val > 3:
         return 1
     else:
@@ -134,25 +139,25 @@ def get_pulse_duration_wind(val):
 
 def get_pulse_duration_precip(val):
     if val >= 100:
-        return 20*PULSE_MULTIPLIER
+        return 20 * PULSE_MULTIPLIER
     elif val < 100 and val >= 90:
-        return 18*PULSE_MULTIPLIER
+        return 18 * PULSE_MULTIPLIER
     elif val < 90 and val >= 80:
-        return 16*PULSE_MULTIPLIER
+        return 16 * PULSE_MULTIPLIER
     elif val < 80 and val >= 70:
-        return 14*PULSE_MULTIPLIER
+        return 14 * PULSE_MULTIPLIER
     elif val < 70 and val >= 60:
-        return 12*PULSE_MULTIPLIER
+        return 12 * PULSE_MULTIPLIER
     elif val < 60 and val >= 50:
-        return 10*PULSE_MULTIPLIER
+        return 10 * PULSE_MULTIPLIER
     elif val < 50 and val >= 40:
-        return 8*PULSE_MULTIPLIER
+        return 8 * PULSE_MULTIPLIER
     elif val < 40 and val >= 30:
-        return 6*PULSE_MULTIPLIER
+        return 6 * PULSE_MULTIPLIER
     elif val < 30 and val >= 20:
-        return 4*PULSE_MULTIPLIER
+        return 4 * PULSE_MULTIPLIER
     elif val < 20 and val >= 10:
-        return 2*PULSE_MULTIPLIER
+        return 2 * PULSE_MULTIPLIER
     elif val < 10 and val >= 5:
         return PULSE_MULTIPLIER
     elif val < 5 and val > 3:
@@ -163,16 +168,16 @@ def get_pulse_duration_precip(val):
 def set_pulse(x, y, duration, color):
     if duration == -1:
         # Always off
-        set_color(x,y,NO_COLOR)
+        set_color(x, y, NO_COLOR)
 
-    offset = int((PULSE_STEPS - duration)/2)
+    offset = int((PULSE_STEPS - duration) / 2)
     if duration > 0 and TICK % PULSE_STEPS >= offset \
         and TICK % PULSE_STEPS < PULSE_STEPS - offset:
         # Activate
-        colorFade(x,y,NO_COLOR,color,step=9)
+        colorFade(x, y, NO_COLOR, color, step=9)
     elif duration > 0:
         # Deactivate
-        colorFade(x,y,NO_COLOR,color,step=1)
+        colorFade(x, y, NO_COLOR, color, step=1)
 
 def update_pulse():
     for x in range(len(PRECIP_VALS)):
