@@ -70,7 +70,7 @@ UPDATE_LAST = 0
 # Setup unicorn phat
 uh.set_layout(uh.PHAT)
 uh.rotation(0)
-uh.brightness(0.6)
+uh.brightness(0.5)
 
 # Helpers to set pixel colors
 def set_color(x, y, color):
