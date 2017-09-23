@@ -15,6 +15,9 @@ WIND_COLOR = (255,0,255)
 FOG_COLOR = (0,127,0)
 CLOUDY_COLOR = (240,248,255)
 PARTLY_CLOUDY_COLOR = (90,94,97)
+HOT_COLOR = (255,0,0)
+BASE_TEMP_COLOR = (0,255,0)
+COLD_COLOR = (0,0,255)
 
 # Names used by darksky.net https://darksky.net/dev/docs#data-point-object
 ICON_NAMES = ['clear-day', 'clear-night', 'rain', 'snow', 'sleet', 'wind',
@@ -100,7 +103,16 @@ def set_icon(x, icon):
     set_color(x,COL_ICON,color)
 
 def set_temp(x, temp):
-    return
+    s = get_temp_step(temp)
+    if s == 0:
+        # Near BASE_TEMP
+        set_color(x, COL_TEMP, BASE_TEMP_COLOR)
+    elif temp > BASE_TEMP:
+        # Hotter
+        color_fade(x, COL_TEMP, BASE_TEMP_COLOR, HOT_COLOR, step=s)
+    else:
+        # Colder
+        color_fade(x, COL_TEMP, BASE_TEMP_COLOR, COLD_COLOR, step=s)
 
 def set_precip(x, precip):
     PRECIP_VALS[x] = int(precip * 100)
@@ -119,11 +131,37 @@ def update_weather():
             precip = weather.hourly[i]['precipProbability']
             wind = weather.hourly[i]['windSpeed']
             set_icon(i, icon)
-            #set_temp(i, temp)
+            set_temp(i, temp)
             set_precip(i, precip)
             set_wind(i, wind)
 
+            # Debugging
+            print icon,temp,precip,wind
         UPDATE_LAST=time.time()
+
+
+# Helper for setting temp colors
+def get_temp_step(val):
+    if val >= BASE_TEMP -3 and val < BASE_TEMP + 3:
+        return 0
+    # Hotter
+    elif val >= BASE_TEMP + 3 and val < BASE_TEMP + 8:
+        return 2
+    elif val >= BASE_TEMP + 8 and val < BASE_TEMP + 15:
+        return 3
+    elif val >= BASE_TEMP + 15 and val < BASE_TEMP + 25:
+        return 5
+    elif val >= BASE_TEMP + 25:
+        return 8
+    # Colder
+    elif val < BASE_TEMP - 3 and val > BASE_TEMP - 8:
+        return 2
+    elif val <= BASE_TEMP - 8 and val > BASE_TEMP - 15:
+        return 3
+    elif val <= BASE_TEMP - 15 and val > BASE_TEMP - 25:
+        return 5
+    elif val <= BASE_TEMP - 25:
+        return 8
 
 # Helpers for updating pulses
 def get_pulse_duration_wind(val):
