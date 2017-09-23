@@ -188,12 +188,13 @@ def update_pulse():
         set_pulse(x, COL_WIND, duration, WIND_COLOR)
 
 # Main code
-while True:
-    update_pulse()
-    uh.show()
-    TICK += 1
-    time.sleep(TIME_STEP)
-    update_weather()
+def main():
+    while True:
+        update_pulse()
+        uh.show()
+        TICK += 1
+        time.sleep(TIME_STEP)
+        update_weather()
 
 # Init
 if __name__ == "__main__":
