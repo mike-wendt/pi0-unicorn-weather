@@ -79,7 +79,7 @@ def set_color(x, y, color):
     b = int(max(0, min(255, color[2])))
     uh.set_pixel(x, y, r, g, b)
 
-def colorFade(x, y, colorFrom, colorTo, steps=10, step=0):
+def colorFade(x, y, colorFrom, colorTo, steps=8, step=0):
     step_R = (colorTo[0] - colorFrom[0]) / steps
     step_G = (colorTo[1] - colorFrom[1]) / steps
     step_B = (colorTo[2] - colorFrom[2]) / steps
@@ -181,7 +181,7 @@ def set_pulse(x, y, duration, color):
     if duration > 0 and TICK % PULSE_STEPS >= offset \
         and TICK % PULSE_STEPS < PULSE_STEPS - offset:
         # Activate
-        colorFade(x, y, NO_COLOR, color, step=9)
+        colorFade(x, y, NO_COLOR, color, step=8)
     elif duration > 0:
         # Deactivate
         colorFade(x, y, NO_COLOR, color, step=1)
