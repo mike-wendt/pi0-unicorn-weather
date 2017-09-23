@@ -44,7 +44,7 @@ PULSE_STEPS = 20 * PULSE_MULTIPLIER
 TIME_STEP = 0.075
 
 # Base temp in degree F to show temps as green => comfortable
-BASE_TEMP=70
+BASE_TEMP = 70
 
 ### END CONFIG ###
 
