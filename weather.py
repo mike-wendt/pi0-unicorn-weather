@@ -184,13 +184,13 @@ def get_pulse_duration_precip(val):
     if val >= 100:
         return 20 * PULSE_MULTIPLIER
     elif val < 100 and val >= 80:
-        return 18 * PULSE_MULTIPLIER
+        return 16 * PULSE_MULTIPLIER
     elif val < 80 and val >= 60:
-        return 14 * PULSE_MULTIPLIER
+        return 12 * PULSE_MULTIPLIER
     elif val < 60 and val >= 40:
-        return 10 * PULSE_MULTIPLIER
+        return 8 * PULSE_MULTIPLIER
     elif val < 40 and val >= 20:
-        return 6 * PULSE_MULTIPLIER
+        return 4 * PULSE_MULTIPLIER
     elif val < 20 and val >= 10:
         return 2 * PULSE_MULTIPLIER
     elif val < 10 and val >= 5:
