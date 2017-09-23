@@ -190,6 +190,7 @@ def update_pulse():
 # Main code
 def main():
     while True:
+        global TICK
         update_pulse()
         uh.show()
         TICK += 1
