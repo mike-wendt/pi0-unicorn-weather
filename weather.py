@@ -24,12 +24,6 @@ ICON_COLORS = [CLEAR_COLOR, NO_COLOR, RAIN_COLOR, SNOW_COLOR, SNOW_COLOR,
                 PARTLY_CLOUDY_COLOR]
 ICON_UNKNOWN_COLOR = (127,0,0)
 
-# Column numbers
-COL_ICON = 3
-COL_TEMP = 2
-COL_PRECIP = 1
-COL_WIND = 0
-
 # Dark Sky API key
 DARKSKY_KEY = 'API_KEY'
 
@@ -44,9 +38,22 @@ PULSE_MULTIPLIER = 5
 PULSE_STEPS = 20 * PULSE_MULTIPLIER
 
 # Time in sec between refreshes, effects pulse cycle time
-TIME_STEP = 0.05
+TIME_STEP = 0.075
+
+# Base temp in degree F to show temps as green => comfortable
+BASE_TEMP=70
 
 ### END CONFIG ###
+
+### START CONSTANTS ###
+
+# Column numbers
+COL_ICON = 3
+COL_TEMP = 2
+COL_PRECIP = 1
+COL_WIND = 0
+
+### END CONSTANTS ###
 
 ### START GLOBALS ###
 PRECIP_VALS = [0,0,0,0,0,0,0,0]
