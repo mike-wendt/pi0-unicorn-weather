@@ -169,44 +169,32 @@ def get_pulse_duration_wind(val):
         return 20 * PULSE_MULTIPLIER
     elif val < 35 and val >= 25:
         return 16 * PULSE_MULTIPLIER
-    elif val < 25 and val >= 19:
+    elif val < 25 and val >= 25:
         return 12 * PULSE_MULTIPLIER
-    elif val < 19 and val >= 13:
+    elif val < 20 and val >= 15:
         return 8 * PULSE_MULTIPLIER
-    elif val < 13 and val >= 8:
+    elif val < 15 and val >= 10:
         return 4 * PULSE_MULTIPLIER
-    elif val < 8 and val >= 5:
+    elif val < 10 and val >= 5:
         return 2 * PULSE_MULTIPLIER
-    elif val < 5 and val > 3:
-        return 1
     else:
         return -1
 
 def get_pulse_duration_precip(val):
     if val >= 100:
         return 20 * PULSE_MULTIPLIER
-    elif val < 100 and val >= 90:
+    elif val < 100 and val >= 80:
         return 18 * PULSE_MULTIPLIER
-    elif val < 90 and val >= 80:
-        return 16 * PULSE_MULTIPLIER
-    elif val < 80 and val >= 70:
+    elif val < 80 and val >= 60:
         return 14 * PULSE_MULTIPLIER
-    elif val < 70 and val >= 60:
-        return 12 * PULSE_MULTIPLIER
-    elif val < 60 and val >= 50:
+    elif val < 60 and val >= 40:
         return 10 * PULSE_MULTIPLIER
-    elif val < 50 and val >= 40:
-        return 8 * PULSE_MULTIPLIER
-    elif val < 40 and val >= 30:
+    elif val < 40 and val >= 20:
         return 6 * PULSE_MULTIPLIER
-    elif val < 30 and val >= 20:
-        return 4 * PULSE_MULTIPLIER
     elif val < 20 and val >= 10:
         return 2 * PULSE_MULTIPLIER
     elif val < 10 and val >= 5:
         return PULSE_MULTIPLIER
-    elif val < 5 and val > 3:
-        return 1
     else:
         return -1
 
